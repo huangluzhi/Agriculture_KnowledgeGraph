@@ -6,7 +6,7 @@ class Neo4j():
 		print("create neo4j class ...")
 
 	def connectDB(self):
-		self.graph = Graph("http://localhost:7474", username="neo4j", password="123456")
+		self.graph = Graph("http://localhost:7474", username="neo4j", password="zasqwe")
 
 	def matchItembyTitle(self,value):
 
@@ -63,8 +63,8 @@ class Neo4j():
 	def findRelationByEntities(self,entity1,entity2):
 		answer = self.graph.run("MATCH (p1:HudongItem {title:\"" + str(entity1) + "\"}),(p2:HudongItem{title:\""+str(entity2)+"\"}),p=shortestpath((p1)-[rel:RELATION*]-(p2)) RETURN rel").evaluate()
 		#answer = self.graph.run("MATCH (p1:HudongItem {title:\"" + entity1 + "\"})-[rel:RELATION]-(p2:HudongItem{title:\""+entity2+"\"}) RETURN p1,p2").data()
-		
-		if(answer is None):	
+
+		if(answer is None):
 			answer = self.graph.run("MATCH (p1:HudongItem {title:\"" + str(entity1) + "\"}),(p2:NewNode {title:\""+str(entity2)+"\"}),p=shortestpath((p1)-[rel:RELATION*]-(p2)) RETURN p").evaluate()
 		if(answer is None):
 			answer = self.graph.run("MATCH (p1:NewNode {title:\"" + str(entity1) + "\"}),(p2:HudongItem{title:\""+str(entity2)+"\"}),p=shortestpath((p1)-[rel:RELATION*]-(p2)) RETURN p").evaluate()
@@ -86,7 +86,7 @@ class Neo4j():
 				tmp['n1'] = start_node
 				tmp['n2'] = end_node
 				tmp['rel'] = x
-				relationDict.append(tmp)		
+				relationDict.append(tmp)
 		return relationDict
 
 	#查询数据库中是否有对应的实体-关系匹配
