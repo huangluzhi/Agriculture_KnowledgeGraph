@@ -22,7 +22,7 @@ class entitiesSpider(scrapy.spiders.Spider):
 		entityNumberList = list()
 		jsonItemList = list()
 		entityCount = 0
-		with open('/home/kuangjun/predict_labels7.txt','r') as f:
+		with open('./zhwiki-CS-title.txt','r') as f:
 			for line in f:
 				entity = line.split(" ")[0]
 				if(len(line.split(" ")) >= 2):
@@ -33,8 +33,8 @@ class entitiesSpider(scrapy.spiders.Spider):
 				entityNumberList.append(entityNumber)
 				entityCount += 1
 		url_list = list()
-		
-		count = 0 
+
+		count = 0
 		for entity in entityList:
 			if(self.containChinese(entity)):
 				url = "https://www.wikidata.org/w/api.php?action=wbsearchentities&search="+entity+"&language=zh&format=json"
@@ -50,7 +50,7 @@ class entitiesSpider(scrapy.spiders.Spider):
 			"keep_alive" : "False"
 		}
 		for url in url_list:
-			
+
 			print(1.0*count/entityCount)
 			#httpRequest = requests.session()
 			#httpRequest.keep_alive = False
