@@ -15,7 +15,7 @@ def showtagging_data(request):
 		# 连接数据库
 		db = neo_con
 		title = request.GET['title']
-		answer = db.matchHudongItembyTitle(title)[0]['n']
+		answer = db.matchcsNodebyTitle(title)[0]['n']
 		if answer == None:
 			ctx['title'] = '<h1> 该url不存在，别乱搞！ </h1>'
 			return render(request, "tagging_data.html", ctx)
@@ -25,15 +25,13 @@ def showtagging_data(request):
 
 		ctx['image'] = '<img class="rounded card-img-top img-fluid" src="' + str(image) + '" alt="该条目无图片" style="width:30%" >'
 
-		ctx['baseInfoKeyList'] = []
-		List = answer['baseInfoKeyList'].split('##')
-		for p in List:
-			ctx['baseInfoKeyList'].append(p)
-
 		ctx['baseInfoValueList'] = []
-		List = answer['baseInfoValueList'].split('##')
+		ctx['baseInfoKeyList'] = []
+		List = answer['infobox'].split('##')[1:]
 		for p in List:
-			ctx['baseInfoValueList'].append(p)
+			if len(p.split('=')) > 1:
+				ctx['baseInfoKeyList'].append(p.split('=')[0])
+				ctx['baseInfoValueList'].append(p.split('=')[1])
 
 		text = ""
 		List = answer['openTypeList'].split('##')
@@ -42,8 +40,8 @@ def showtagging_data(request):
 		ctx['openTypeList'] = text
 
 		text = ""
-		keyList = answer['baseInfoKeyList'].split('##')
-		valueList = answer['baseInfoValueList'].split('##')
+		keyList = ctx['baseInfoKeyList']
+		valueList = ctx['baseInfoValueList']
 		i = 0
 		while i < len(keyList) :
 			value = " "

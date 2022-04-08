@@ -103,3 +103,6 @@ wikidataSpider/TrainDataBaseOnWiki/train_data*.txt
 relationExtraction/data/*.txt
 demo/.idea/*
 .idea/*
+
+# vector file
+KNN_predict/wiki.zh*

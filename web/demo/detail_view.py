@@ -2,7 +2,7 @@
 from django.shortcuts import render
 from django.views.decorators import csrf
 import thulac
- 
+
 import sys
 sys.path.append("..")
 from toolkit.pre_load import neo_con
@@ -15,11 +15,11 @@ def showdetail(request):
 	if 'title' in request.GET:
 		# 连接数据库
 		db = neo_con
-		
+
 		title = request.GET['title']
-		answer = db.matchHudongItembyTitle(title)
+		answer = db.matchcsNodebyTitle(title)
 		if answer == None:
-			return render(request, "404.html", ctx) 
+			return render(request, "404.html", ctx)
 
 		if len(answer) > 0:
 			answer = answer[0]['n']
@@ -30,28 +30,26 @@ def showdetail(request):
 		ctx['detail'] = answer['detail']
 		ctx['title'] = answer['title']
 		image = answer['image']
-		
+
 		ctx['image'] = '<img src="' + str(image) + '" alt="该条目无图片" height="100%" width="100%" >'
-		
-		ctx['baseInfoKeyList'] = []
-		List = answer['baseInfoKeyList'].split('##')
-		for p in List:
-			ctx['baseInfoKeyList'].append(p)
-			
+
 		ctx['baseInfoValueList'] = []
-		List = answer['baseInfoValueList'].split('##')
+		ctx['baseInfoKeyList'] = []
+		List = answer['infobox'].split('##')[1:]
 		for p in List:
-			ctx['baseInfoValueList'].append(p)
-			
+			if len(p.split('=')) > 1:
+				ctx['baseInfoKeyList'].append(p.split('=')[0])
+				ctx['baseInfoValueList'].append(p.split('=')[1])
+
 		text = ""
-		List = answer['openTypeList'].split('##')
+		keyList = ctx['baseInfoKeyList']
+		valueList = ctx['baseInfoValueList']
+		List = answer['categorie'].split('##')
 		for p in List:
 			text += '<span class="badge bg-important">' + str(p) + '</span> '
-		ctx['openTypeList'] = text
-		
+		ctx['categories'] = text
+
 		text = '<table class="table table-striped table-advance table-hover"> <tbody>'
-		keyList = answer['baseInfoKeyList'].split('##')
-		valueList = answer['baseInfoValueList'].split('##')
 		i = 0
 		while i < len(keyList) :
 			value = " "
@@ -61,7 +59,7 @@ def showdetail(request):
 			text += '<td><strong>' + keyList[i] + '</strong></td>'
 			text += '<td>' + value + '</td>'
 			i += 1
-			
+
 			if i < len(valueList):
 				value = valueList[i]
 			if i < len(keyList) :
@@ -73,10 +71,10 @@ def showdetail(request):
 			i += 1
 			text += "</tr>"
 		text += " </tbody> </table>"
-		if answer['baseInfoKeyList'].strip() == '':
+		if answer['infobox'].strip() == '':
 			text = ''
-		ctx['baseInfoTable'] = text 
-		
+		ctx['baseInfoTable'] = text
+
 		tagcloud = ""
 		taglist = wv_model.get_simi_top(answer['title'], 10)
 		for tag in taglist:
@@ -84,7 +82,7 @@ def showdetail(request):
 			tagcloud += str(tag) + "</a>"
 #			print(tag)
 		ctx['tagcloud'] = tagcloud
-		
+
 		agri_type = ""
 		ansList = tree.get_path(answer['title'], True)
 		for List in ansList:
@@ -96,30 +94,30 @@ def showdetail(request):
 				else:
 					agri_type += ' / '
 				agri_type += str(p)
-				
-			agri_type += '</p>'	
+
+			agri_type += '</p>'
 		if len(ansList) == 0:
 			agri_type = '<p > 暂无农业类型</p>'
-		ctx['agri_type'] = agri_type	
-		
+		ctx['agri_type'] = agri_type
+
 		entity_type = ""
 		explain = get_explain(predict_labels[answer['title']])
 		detail_explain = get_detail_explain(predict_labels[answer['title']])
 		entity_type += '<p > [' + explain + "]: "
 		entity_type += detail_explain + "</p>"
-		ctx['entity_type'] = entity_type	
-			
+		ctx['entity_type'] = entity_type
+
 	else:
-		return render(request, "404.html", ctx) 		
-			
+		return render(request, "404.html", ctx)
+
 	return render(request, "detail.html", ctx)
-	
-#	
+
+#
 ## -*- coding: utf-8 -*-
 #from django.http import HttpResponse
 #from django.shortcuts import render_to_response
 #import thulac
-# 
+#
 #import sys
 #sys.path.append("..")
 #from neo4jModel.models import Neo4j
@@ -137,5 +135,5 @@ def showdetail(request):
 #		title = request.GET['title']
 #		answer = db.matchItembyTitle(title)
 #		message = answer['detail']
-#				
+#
 #	return HttpResponse(message)

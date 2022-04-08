@@ -34,7 +34,7 @@ def decisions_making(request):  # index页面需要一开始就加载的内容�
         entity_list = get_similar_entity(img_base64)
 
         for entity in entity_list:
-            answer = db.matchHudongItembyTitle(entity['label_name'])
+            answer = db.matchcsNodebyTitle(entity['label_name'])
             if len(answer) > 0:
                 answer = answer[0]['n']
             else:

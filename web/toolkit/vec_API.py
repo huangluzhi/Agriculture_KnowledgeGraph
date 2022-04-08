@@ -4,7 +4,7 @@ import random
 #class word_vector :
 #	word = None
 #	vector = None
-#	
+#
 #	def __init__(self, line):
 #		line = line.split(" ")
 #		self.wv_listword = line[0]
@@ -12,21 +12,21 @@ import random
 #		for i in range(1,len(line)):
 #			self.wv_listvector.append(line[i])
 
-def cos_simi(vector1,vector2):  
-	dot_product = 0.0  
-	normA = 0.0  
+def cos_simi(vector1,vector2):
+	dot_product = 0.0
+	normA = 0.0
 	normB = 0.0
-	
-	for a,b in zip(vector1,vector2):  
-		dot_product += a*b  
-		normA += a**2  
-		normB += b**2  
-	
-		
-	if normA == 0.0 or normB==0.0:  
-		return None  
-	else:  
-		return dot_product / ((normA*normB)**0.5)  
+
+	for a,b in zip(vector1,vector2):
+		dot_product += a*b
+		normA += a**2
+		normB += b**2
+
+
+	if normA == 0.0 or normB==0.0:
+		return None
+	else:
+		return dot_product / ((normA*normB)**0.5)
 
 class word_vector_model :
 	wv = None
@@ -42,10 +42,10 @@ class word_vector_model :
 				curList = []
 				for i in range(1,len(line)):
 					curList.append(float(line[i]))
-				self.wv[line[0]] = curList
+				self.wv[line[0].replace("_"," ")] = curList
 		print('word vector read over...')
-	
-	
+
+
 	def get_simi_top(self, word , top_num):
 		top_num += 1
 		vec = self.wv[word]
@@ -53,9 +53,9 @@ class word_vector_model :
 		cursimi = []
 		for key,value in self.wv.items():
 			if len(key) > 12:
-				continue 
+				continue
 			if random.randint(0,100) < 70:  #留百分8数据
-				continue 
+				continue
 			if key == word:
 				continue
 			simi = cos_simi(vec, value)
@@ -67,7 +67,7 @@ class word_vector_model :
 				curword.append(key)
 				cursimi.append(simi)
 				continue
-				
+
 			while p>=0 :
 				if simi < cursimi[p]:
 					curword.insert(p+1, key)
@@ -81,7 +81,7 @@ class word_vector_model :
 			if len(curword) > top_num:
 				curword = curword[:top_num]
 				cursimi = cursimi[:top_num]
-		
+
 		answord = []
 		vis = set()
 		top_num -= 1
@@ -90,19 +90,19 @@ class word_vector_model :
 			maxword = ''
 			for i in range(len(curword)):
 				if curword[i] in vis:
-					continue 
+					continue
 				if cursimi[i]>maxx:
 					maxx = cursimi[i]
 					maxword = curword[i]
-			
+
 			answord.append(maxword)
 			vis.add(maxword)
-		
+
 		return answord
-			
-			
-			
-		 
+
+
+
+
 #wvm = word_vector_model()
 #wvm.read_vec('vector.txt')
 #print(wvm.get_simi_top('福建', 2))

@@ -17,7 +17,7 @@
                 <li><i class="fa fa-link" aria-hidden="true"></i>关系查询</li>
             </ol>
     </div>
-    
+
     <div class = "col-md-12">
     	<div class = "panel panel-default">
 			<header class="panel-heading">
@@ -126,7 +126,7 @@
 
     //echarts 数据
     var data = [] ;
-    var links = [] ;	
+    var links = [] ;
 
     //构造展示的数据
     var maxDisPlayNode = 15 ;
@@ -153,7 +153,7 @@
         	}
         }
 
-        node1['id'] = relationTarget ; 
+        node1['id'] = relationTarget ;
         if(flag === 1){
         	id++ ;
         	data.push(node1) ;
@@ -178,7 +178,7 @@
         		break ;
         	}
         }
-        node2['id'] = relationTarget ; 
+        node2['id'] = relationTarget ;
         if(flag === 1){
         	id++ ;
         	data.push(node2) ;
@@ -188,14 +188,14 @@
         relation['source'] = node1['id'];
         relation['target'] = node2['id'] ;
         relation['category'] = 0 ;
-        flag = 1;  
+        flag = 1;
         for(var j = 0 ;j<links.length;j++){
         	if(links[j]['source'] == relation['source'] && links[j]['target'] == relation['target']){
         		links[j]['value'] = links[j]['value'] + searchResult[i]['rel']['type'] ;
         		flag = 0 ;
         		break ;
         	}
-        }           
+        }
         if(flag === 1){
         	relation['value'] = searchResult[i]['rel']['type'] ;
         	relation['symbolSize'] = 10;
@@ -207,7 +207,7 @@
 
      // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('graph'));
-    
+
     option = {
 	    title: {
 	        text: ''
@@ -244,14 +244,14 @@
 	                    }
 	                }
 	            }, {
-	                name: 'HudongItem',
+	                name: 'csNode',
 	                itemStyle: {
 	                    normal: {
 	                        color: "#4592FF",
 	                    }
 	                }
 	            }, {
-	                name: 'NewNode',
+	                name: 'singleNode',
 	                itemStyle: {
 	                    normal: {
 	                        color: "#C71585",
@@ -312,7 +312,7 @@
 	   else{
 	   	   $("#relation_name").addClass("hide");
 	   }
-	  
+
 	});
 
 

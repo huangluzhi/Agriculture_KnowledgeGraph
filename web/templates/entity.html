@@ -36,7 +36,7 @@
             </div>
         </div>
 
-        
+
     </div>
     <p>
         <div class = "col-md-12">
@@ -101,7 +101,7 @@
             node['name'] = str;
             //alert(document.getElementById('user_text').value)
             node['draggable'] = true ;
-            var id = 0; 
+            var id = 0;
             node['id'] = id.toString() ;
             data.push(node) ;
 
@@ -131,7 +131,7 @@
                 relation = {}
                 relation['source'] = 0 ;
                 relation['target'] = relationTarget ;
-                relation['category'] = 0 ;               
+                relation['category'] = 0 ;
 
                 if(flag === 1){
                     data.push(node) ;
@@ -143,7 +143,7 @@
                     maxDisPlayNode += 1 ;
                     for(var j = 0; j<links.length ;j++){
                         if(links[j]['target'] === relationTarget){
-                            links[j]['value'] = links[j]['value']+" | "+entityRelation[0][i]['rel']['type'] 
+                            links[j]['value'] = links[j]['value']+" | "+entityRelation[0][i]['rel']['type']
                             break ;
                         }
                     }
@@ -173,7 +173,7 @@
         }
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('graph'));
-        
+
         option = {
             title: {
                 text: ''
@@ -210,14 +210,14 @@
                             }
                         }
                     }, {
-                        name: 'HudongItem',
+                        name: 'csNode',
                         itemStyle: {
                             normal: {
                                 color: "#4592FF",
                             }
                         }
                     }, {
-                        name: 'NewNode',
+                        name: 'singleNode',
                         itemStyle: {
                             normal: {
                                 color: "#C71585",

@@ -7,7 +7,7 @@ class loadDatatoNeo4j(object):
 	def __init__(self):
 		print("start load data ...")
 	def connectDB(self):
-		self.graph = Graph("http://localhost:7474",username = "neo4j" , password = "8313178")
+		self.graph = Graph("http://localhost:7474",username = "neo4j" , password = "zasqwe")
 		print("connect neo4j success!")
 
 	def readData(self):
@@ -15,9 +15,9 @@ class loadDatatoNeo4j(object):
 		with open("new_node.csv",'w') as fw:
 			fw.write("title,lable"+'\n')
 		with open("wikidata_relation.csv","w") as fw:
-			fw.write("HudongItem1,relation,HudongItem2"+'\n')
+			fw.write("csNode1,relation,csNode2"+'\n')
 		with open("wikidata_relation2.csv","w") as fw:
-			fw.write("HudongItem,relation,NewNode"+'\n')
+			fw.write("csNode,relation,NewNode"+'\n')
 		with open("../wikidataRelation/entityRelation.json","r") as fr:
 			with open("new_node.csv",'a') as fwNewNode:
 				with open("wikidata_relation.csv",'a') as fwWikidataRelation:
@@ -32,13 +32,13 @@ class loadDatatoNeo4j(object):
 							find_entity1_result = self.graph.find_one(
 								property_key = "title" ,
 								property_value = entity1,
-								label = "HudongItem"
+								label = "csNode"
 							)
 							#搜索entity2
 							find_entity2_result = self.graph.find_one(
 								property_key = "title",
 								property_value = entity2,
-								label = "HudongItem"
+								label = "csNode"
 							)
 							count += 1
 							print(count/264092)
@@ -53,7 +53,7 @@ class loadDatatoNeo4j(object):
 								entityRelation = entityRelation + item
 							#去掉entity2字符串中的逗号,并将繁体转成简体
 							entity2List = re.split(",|\"",entity2)
-							entity2 = "" 
+							entity2 = ""
 							for item in entity2List:
 								entity2 = entity2 + item
 							entity2 = Converter('zh-hans').convert(entity2)
@@ -83,4 +83,4 @@ if __name__ == "__main__":
 
 
 
-		
+

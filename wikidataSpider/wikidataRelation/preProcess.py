@@ -11,7 +11,8 @@ with open("entities.json", "r") as fr:
         originname = entity['entityOriginName'].rstrip('\n')
         isMatched = False
         for repository in entity['jsonItem']['search']:
-            if (repository['match']['language'] in ['zh', 'en', 'zh-hans', 'zh-hant', 'zh-cn', 'en-gb']) and repository['match']['text'] == originname :
+            # if (repository['match']['language'] in ['zh', 'en', 'zh-hans', 'zh-hant', 'zh-cn', 'en-gb']) and repository['match']['text'] == originname :
+            if repository['match']['text'] == originname :
                 resultJson = dict()
                 resultJson['entity']  = repository
                 resultJson['entityOriginName']  = originname
@@ -22,7 +23,7 @@ with open("entities.json", "r") as fr:
                 break
         if not isMatched:
             for repository in entity['jsonItem']['search']:
-                if (repository['match']['language'] in ['en', 'en-gb']) and repository['match']['text'].lower() == originname.lower() :
+                if repository['match']['text'].lower() == originname.lower() :
                     resultJson = dict()
                     resultJson['entity']  = repository
                     resultJson['entityOriginName']  = repository['match']['text']
@@ -31,5 +32,5 @@ with open("entities.json", "r") as fr:
                     resultJsonFile.write(resultJson)
                     isMatched = True
                     break
-        # if not isMatched:
-        #     print(originname, " ", entity['jsonItem']['search'][0]['match']['text'])
+        if not isMatched:
+            print(originname, " ", entity['jsonItem']['search'][0]['match']['text'])

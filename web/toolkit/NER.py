@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 import sys
 import csv
-sys.path.append("..")		
+sys.path.append("..")
 from toolkit.pre_load import pre_load_thu,neo_con,predict_labels
 
 def preok(s):  #上一个词的词性筛选
-	
+
 	if s=='n' or s=='np' or s=='ns' or s=='ni' or s=='nz':
 		return True
 	if s=='v' or s=='a' or s=='i' or s=='j' or s=='x' or s=='id' or s=='g' or s=='u':
@@ -13,16 +13,16 @@ def preok(s):  #上一个词的词性筛选
 	if s=='t' or s=='m':
 		return True
 	return False
-	
+
 def nowok(s): #当前词的词性筛选
-	
+
 	if s=='n' or s=='np' or s=='ns' or s=='ni' or s=='nz':
 		return True
 	if s=='a' or s=='i' or s=='j' or s=='x' or s=='id' or s=='g' or s=='t':
 		return True
 	if s=='t' or s=='m':
 		return True
-	return False	
+	return False
 
 def temporaryok(s):  # 一些暂时确定是名词短语的（数据库中可以没有）
 	if s=='np' or s=='ns' or s=='ni' or s=='nz':
@@ -46,7 +46,7 @@ def get_explain(s):
 	if s == 6:
 		return '植物学名词'
 	if s == 7:
-		return '化学名词'	
+		return '化学名词'
 	if s == 8:
 		return '季节气候'
 	if s == 9:
@@ -62,14 +62,14 @@ def get_explain(s):
 	if s == 14:
 		return '农机具'
 	if s == 15:
-		return '农业技术术语'	
+		return '农业技术术语'
 	if s == 16:
-		return '其它实体'	
-	
+		return '其它实体'
+
 	if s == 'np':
 		return '人物'
 	if s == 'ns':
-		return '地点'	
+		return '地点'
 	if s == 'ni':
 		return '机构'
 	if s == 'nz':
@@ -82,8 +82,8 @@ def get_explain(s):
 		return '其它'
 	if s == 't':
 		return '时间日期'
-		
-	return '非实体'		
+
+	return '非实体'
 
 
 def get_detail_explain(s):
@@ -100,7 +100,7 @@ def get_detail_explain(s):
 	if s == 6:
 		return '包括植物名称，植物类别，植物学相关术语'
 	if s == 7:
-		return '包括化肥，农药，杀菌剂，其它化学品，以及一些化学术语'	
+		return '包括化肥，农药，杀菌剂，其它化学品，以及一些化学术语'
 	if s == 8:
 		return '包括天气气候，季节，节气'
 	if s == 9:
@@ -116,15 +116,15 @@ def get_detail_explain(s):
 	if s == 14:
 		return '包括用于农业生产的自动化机械，手工工具'
 	if s == 15:
-		return '包括农学名词，农业技术措施'	
+		return '包括农学名词，农业技术措施'
 	if s == 16:
-		return '与农业领域没有特别直接的关系，但是也是实体'	
-		
-	
+		return '与农业领域没有特别直接的关系，但是也是实体'
+
+
 	if s == 'np':
 		return '包括人名，职位'
 	if s == 'ns':
-		return '包括地名，区域，行政区等'	
+		return '包括地名，区域，行政区等'
 	if s == 'ni':
 		return '包括机构名，会议名，期刊名等'
 	if s == 'nz':
@@ -137,8 +137,8 @@ def get_detail_explain(s):
 		return ' '
 	if s == 't':
 		return ' '
-		
-	return '非实体'	
+
+	return '非实体'
 
 
 # 前两个参数为thulac预加载好的模型，和已连接的neo4j
@@ -152,11 +152,11 @@ def get_NE(text):
 	db = neo_con
 	TagList = thu1.cut(text, text=False)
 	TagList.append(['===',None])  #末尾加个不合法的，后面好写
-	
+
 	# 读取实体类别,注意要和predict_labels.txt一个目录
 	label = predict_labels
-	
-	answerList = []		
+
+	answerList = []
 	i = 0
 	length = len(TagList) - 1 # 扣掉多加的那个
 	while i < length:
@@ -165,30 +165,30 @@ def get_NE(text):
 		p2 = TagList[i+1][0]
 		t2 = TagList[i+1][1]
 		p12 = p1 + TagList[i+1][0]
-		
+
 		# 不但需要txt中有实体，还需要判断数据库中有没有
-		flag = db.matchHudongItembyTitle(p12) 
+		flag = db.matchcsNodebyTitle(p12)
 		if p12 in label and flag != None and preok(t1) and nowok(t2):  # 组合2个词如果得到实体
 			answerList.append([p12,label[p12]])
 			i += 2
 			continue
-		
-		flag = db.matchHudongItembyTitle(p1)
+
+		flag = db.matchcsNodebyTitle(p1)
 		if p1 in label and flag != None and nowok(t1):	 # 当前词如果是实体
 			answerList.append([p1,label[p1]])
 			i += 1
 			continue
-		
+
 		if temporaryok(t1):
 			answerList.append([p1,t1])
 			i += 1
 			continue
-			
+
 		answerList.append([p1,0])
 		i += 1
-		
+
 	return answerList
-		
-	
+
+
 # from toolkit.pre_load import pre_load_thu,neo_con
 # print(get_NE(pre_load_thu, neo_con, '美利坚大香蕉习近平的橘子 hhhhhh'))
