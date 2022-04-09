@@ -1,14 +1,16 @@
 import json
-from py2neo import Node, Relationship ,Graph
+from py2neo import Node, Relationship ,Graph,NodeMatcher
 from langconv import *
 import re
 class loadDatatoNeo4j(object):
 	graph = None
+	matcher = None
 	def __init__(self):
 		print("start load data ...")
 	def connectDB(self):
-		self.graph = Graph("http://localhost:7474",username = "neo4j" , password = "zasqwe")
+		self.graph = Graph("http://localhost:7474", auth=("neo4j", "zasqwe"))
 		print("connect neo4j success!")
+		self.matcher = NodeMatcher(self.graph)
 
 	def readData(self):
 		count = 0
@@ -29,17 +31,19 @@ class loadDatatoNeo4j(object):
 							entity1 = entityRelationJson['entity1']
 							entity2 = entityRelationJson['entity2']
 							#搜索entity1
-							find_entity1_result = self.graph.find_one(
-								property_key = "title" ,
-								property_value = entity1,
-								label = "csNode"
-							)
+							find_entity1_result = self.matcher.match("csNode", title=entity1).first()
+							# find_entity1_result = self.graph.find_one(
+							# 	property_key = "title" ,
+							# 	property_value = entity1,
+							# 	label = "csNode"
+							# )
 							#搜索entity2
-							find_entity2_result = self.graph.find_one(
-								property_key = "title",
-								property_value = entity2,
-								label = "csNode"
-							)
+							find_entity2_result = self.matcher.match("csNode", title=entity2).first()
+							# find_entity2_result = self.graph.find_one(
+							# 	property_key = "title",
+							# 	property_value = entity2,
+							# 	label = "csNode"
+							# )
 							count += 1
 							print(count/264092)
 							# 如果entity1不在实体列表中(emmmmmm,不可能吧)，那么就不要继续了

@@ -44,7 +44,7 @@ def showdetail(request):
 		text = ""
 		keyList = ctx['baseInfoKeyList']
 		valueList = ctx['baseInfoValueList']
-		List = answer['categorie'].split('##')
+		List = answer['categories'].split('##')
 		for p in List:
 			text += '<span class="badge bg-important">' + str(p) + '</span> '
 		ctx['categories'] = text
