@@ -1,0 +1,116 @@
+<!--
+  The Side Bar
+-->
+
+<div id="sidebar" class="d-flex flex-column align-items-end">
+  <div class="profile-wrapper text-center">
+    <div id="avatar">
+      <a href="/" alt="avatar" class="mx-auto">
+          <img src="static/img/avatar.jpg" alt="avatar" onerror="this.style.display='none'">
+      </a>
+    </div>
+
+    <div class="site-title mt-3">
+      <a href="/">知识图谱</a>
+    </div>
+    <div class="site-subtitle font-italic">计算机数据科学</div>
+
+  </div><!-- .profile-wrapper -->
+
+  <ul class="w-100">
+
+    <!-- home -->
+    <li class="nav-item active">
+      <a href="/" class="nav-link">
+        <i class="fa-fw fas fa-search ml-xl-3 mr-xl-3 unloaded"></i>
+        <span>实体识别</span>
+      </a>
+    </li>
+    <li class="nav-item active">
+      <a href="/search_entity" class="nav-link">
+        <i class="fa-fw fas fa-share ml-xl-3 mr-xl-3 unloaded"></i>
+        <span>实体查询</span>
+      </a>
+    </li>
+    <li class="nav-item active">
+      <a href="/search_relation" class="nav-link">
+        <i class="fa-fw fas fa-link ml-xl-3 mr-xl-3 unloaded"></i>
+        <span>关系查询</span>
+      </a>
+    </li>
+    <li class="nav-item active">
+      <a href="/overview?node=数据科学" class="nav-link">
+        <i class="fa-fw fas fa-sitemap ml-xl-3 mr-xl-3 unloaded"></i>
+        <span>科学知识概览</span>
+      </a>
+    </li>
+    <li class="nav-item active">
+      <a href="/qa" class="nav-link">
+        <i class="fa-fw fas fa-comments ml-xl-3 mr-xl-3 unloaded"></i>
+        <span>知识问答</span>
+      </a>
+    </li>
+    <li class="nav-item active">
+      <a href="/decision" class="nav-link">
+        <i class="fa-fw fas fa-images ml-xl-3 mr-xl-3 unloaded"></i>
+        <span>图片检索</span>
+      </a>
+    </li>
+    <!-- the real tabs -->
+  {% comment %}
+    {% for tab in site.tabs %}
+    <li class="nav-item{% if tab.url == page.url %}{{ " active" }}{% endif %}">
+      <a href="{{ tab.url | relative_url }}" class="nav-link">
+        <i class="fa-fw {{ tab.icon }} ml-xl-3 mr-xl-3 unloaded"></i>
+        {% capture tab_name %}{{ tab.url | split: '/' }}{% endcapture %}
+
+        <span>{{ site.data.locales[lang].tabs.[tab_name] | default: tab.title | upcase }}</span>
+      </a>
+    </li> <!-- .nav-item -->
+    {% endfor %}
+  {% endcomment %}
+
+  </ul> <!-- ul.nav.flex-column -->
+
+  {% comment %}
+  <div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center align-items-center">
+
+    {% unless site.theme_mode %}
+      <button class="mode-toggle btn" aria-label="Switch Mode">
+        <i class="fas fa-adjust"></i>
+      </button>
+
+      {% if site.data.contact.size > 0 %}
+        <span class="icon-border"></span>
+      {% endif %}
+    {% endunless %}
+
+    {% for entry in site.data.contact %}
+      {% capture url %}
+        {%- if entry.type == 'github' -%}
+          https://github.com/{{ site.github.username }}
+        {%- elsif entry.type == 'twitter' -%}
+          https://twitter.com/{{ site.twitter.username }}
+        {%- elsif entry.type == 'email' -%}
+          {% assign email = site.social.email | split: '@' %}
+          javascript:location.href = 'mailto:' + ['{{ email[0] }}','{{ email[1] }}'].join('@')
+        {%- elsif entry.type == 'rss' -%}
+          {{ "/feed.xml" | relative_url }}
+        {%- else -%}
+          {{ entry.url }}
+        {%- endif -%}
+      {% endcapture %}
+
+      {% if url %}
+      <a href="{{ url }}" aria-label="{{ entry.type }}"
+        {% unless entry.noblank %}target="_blank" rel="noopener"{% endunless %}>
+        <i class="{{ entry.icon }}"></i>
+      </a>
+      {% endif %}
+
+    {% endfor %}
+
+  </div> <!-- .sidebar-bottom -->
+  {% endcomment %}
+
+</div><!-- #sidebar -->

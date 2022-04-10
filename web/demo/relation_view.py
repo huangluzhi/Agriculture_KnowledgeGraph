@@ -28,6 +28,7 @@ def sortDict(relationDict):
 
 def search_entity(request):
 	ctx = {}
+	breadcrumb = [['Home','\\'],['实体查询']]
 	#根据传入的实体名称搜索出关系
 	if(request.GET):
 		entity = request.GET['user_text']
@@ -43,12 +44,13 @@ def search_entity(request):
 			#将查询结果按照"关系出现次数"的统计结果进行排序
 			entityRelation = sortDict(entityRelation)
 
-			return render(request,'entity.html',{'entityRelation':json.dumps(entityRelation,ensure_ascii=False)})
+			return render(request,'entity.html',{'entityRelation':json.dumps(entityRelation,ensure_ascii=False), 'breadcrumb':breadcrumb})
 
-	return render(request,"entity.html",{'ctx':ctx})
+	return render(request,"entity.html",{'ctx':ctx, 'breadcrumb':breadcrumb})
 
 def search_relation(request):
 	ctx = {}
+	breadcrumb = [['Home','\\'],['关系查询']]
 	if(request.GET):
 		db = neo_con
 		entity1 = request.GET['entity1_text']
@@ -97,6 +99,6 @@ def search_relation(request):
 		if(len(entity1)!=0 and len(relation)!=0 and len(entity2)!=0 ):
 			pass
 		ctx= {'title' : '<h1>暂未找到相应的匹配</h1>'}
-		return render(request,'relation.html',{'ctx':ctx}) 
+		return render(request,'relation.html',{'ctx':ctx, 'breadcrumb':breadcrumb})
 
-	return render(request,'relation.html',{'ctx':ctx}) 
+	return render(request,'relation.html',{'ctx':ctx, 'breadcrumb':breadcrumb})

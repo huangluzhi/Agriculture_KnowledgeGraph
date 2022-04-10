@@ -15,9 +15,18 @@ class Neo4j():
 		answer = self.graph.run(sql).data()
 		return answer
 
-	# 根据title值返回互动百科item
+	# 根据title值返回维基cs-item
 	def matchcsNodebyTitle(self,value):
 		sql = "MATCH (n:csNode { title: '" + str(value) + "' }) return n;"
+		try:
+			answer = self.graph.run(sql).data()
+		except:
+			print(sql)
+		return answer
+
+	# 根据title值返回维基百科item
+	def matchwikiNodebyTitle(self,value):
+		sql = "MATCH (n:wikiNode { title: '" + str(value) + "' }) return n;"
 		try:
 			answer = self.graph.run(sql).data()
 		except:

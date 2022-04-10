@@ -26,6 +26,7 @@ def sortDict(relationDict):
 
 def decisions_making(request):  # index页面需要一开始就加载的内容写在这里
     ctx = {}
+    ctx['breadcrumb'] = [['Home','\\'],['图片检索']]
     if request.POST:
         # 连接数据库
         db = neo_con

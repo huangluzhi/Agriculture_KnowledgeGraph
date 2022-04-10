@@ -340,6 +340,7 @@ pattern = [[r"适合种什么",r"种什么好"],
 		   [r"[\u4e00-\u9fa5]+植物学",r"[\u4e00-\u9fa5]+知识"]]
 def question_answering(request):  # index页面需要一开始就加载的内容写在这里
 	context = {'ctx':''}
+	context['breadcrumb'] = [['Home','\\'],['知识问答']]
 	if(request.GET):
 		question = request.GET['question']
 		cut_statement = thu_lac.cut(question,text=False)

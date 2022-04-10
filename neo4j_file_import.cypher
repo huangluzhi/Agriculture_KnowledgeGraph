@@ -1,6 +1,6 @@
 
-// 将zhwiki-CS-entities.csv 导入 (done)
-LOAD CSV WITH HEADERS  FROM "file:///zhwiki-CS-entities.csv" AS line
+// 将zhwiki-csNode.csv 导入 (done)
+LOAD CSV WITH HEADERS  FROM "file:///zhwiki-csNode.csv" AS line
 CREATE (p:csNode{source:line.source,id:line.id,title:line.title,url:line.url,image:line.image,categories:line.categories,infobox:line.infobox,detail:line.detail})
 
 // 创建索引
@@ -9,8 +9,8 @@ ASSERT c.title IS UNIQUE
 
 
 
-// 将zhwiki-wiki-entities.csv 导入 (done)
-LOAD CSV WITH HEADERS  FROM "file:///zhwiki-wiki-entities.csv" AS line
+// 将zhwiki-wikiNode.csv 导入 (done)
+LOAD CSV WITH HEADERS  FROM "file:///zhwiki-wikiNode.csv" AS line
 CREATE (p:wikiNode{source:line.source,id:line.id,title:line.title,url:line.url,image:line.image,categories:line.categories,infobox:line.infobox,detail:line.detail})
 
 // 创建索引

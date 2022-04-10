@@ -10,21 +10,22 @@ from toolkit.pre_load import tree
 # 读取实体解析的文本
 def show_overview(request):
 	ctx ={}
+	ctx['breadcrumb'] = [['Home','\\'],['知识概览']]
 	if 'node' in request.GET:
 		node = request.GET['node']
 		fatherList = tree.get_father(node)
 		branchList = tree.get_branch(node)
 		leafList = tree.get_leaf(node)
 		ctx['node'] = "分类专题：["+node+"]"
-		
+
 		rownum = 4   #一行的词条数量
 		leaf = ""
-		
-		
+
+
 		alpha_table = {}
 		for alpha in range(ord('A'),ord('Z')+1):
 			alpha_table[chr(alpha)] = []
-			
+
 		for p in leafList:
 			py = pinyin.get_initial(p)
 			alpha = ord('A')
@@ -36,7 +37,7 @@ def show_overview(request):
 					alpha = t
 					break
 			alpha_table[chr(alpha)].append(p)
-		
+
 		for kk in range(ord('A'),ord('Z')+1):
 			k = chr(kk)
 			v = alpha_table[k]
@@ -60,35 +61,35 @@ def show_overview(request):
 				leaf += '</div>'
 				if i%rownum == rownum-1:
 					leaf += "</div>"
-			leaf += '<br/>'		
+			leaf += '<br/>'
 		ctx['leaf'] = leaf
-		
+
 		# 父节点列表
 		father = '<ul class="nav nav-pills nav-stacked">'
 		for p in fatherList:
-			father += '<li role="presentation"> <a href="overview?node=' 
+			father += '<li role="presentation"> <a href="overview?node='
 			father += p + '">'
 			father += '<i class="fa fa-hand-o-right" aria-hidden="true"></i>&nbsp;&nbsp;' + p + '</a></li>'
 		father += '</ul>'
 		if len(fatherList) == 0:
 			father = '<p>已是最高级分类</p>'
 		ctx['father'] = father
-		
+
 		# 非叶子节点列表
 		branch = '<ul class="nav nav-pills nav-stacked">'
 		for p in branchList:
-			branch += '<li role="presentation"> <a href="overview?node=' 
+			branch += '<li role="presentation"> <a href="overview?node='
 			branch += p + '">'
 			branch += '<i class="fa fa-hand-o-right" aria-hidden="true"></i>&nbsp;&nbsp;' + p + '</a></li>'
 		branch += '</ul>'
 		if len(branchList) == 0:
 			branch = '<p>已是最低级分类</p>'
 		ctx['branch'] = branch
-		
+
 		# 分类树构建
 		level_tree = tree.create_UI(node)
 		ctx['level_tree'] = level_tree
-		
-		
+
+
 	return render(request, "overview.html", ctx)
-	
+

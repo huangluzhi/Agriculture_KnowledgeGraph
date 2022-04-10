@@ -2,6 +2,7 @@
 from django.shortcuts import render
 from django.views.decorators import csrf
 import thulac
+import re
 
 import sys
 sys.path.append("..")
@@ -12,13 +13,19 @@ from toolkit.NER import get_explain,get_detail_explain
 # 接收GET请求数据
 def showdetail(request):
 	ctx = {}
+	ctx['breadcrumb'] = [['Home','\\'],['命名实体识别','../'],['实体百科']]
 	if 'title' in request.GET:
 		# 连接数据库
 		db = neo_con
 
 		title = request.GET['title']
+		answer_type = "csNode"
 		answer = db.matchcsNodebyTitle(title)
-		if answer == None:
+		print(answer)
+		if answer == []:
+			answer = db.matchwikiNodebyTitle(title)
+			answer_type = "wikiNode"
+		if answer == []:
 			return render(request, "404.html", ctx)
 
 		if len(answer) > 0:
@@ -27,19 +34,30 @@ def showdetail(request):
 			ctx['title'] = '实体条目出现未知错误'
 			return
 
-		ctx['detail'] = answer['detail']
+		if answer_type == "all":
+			ctx['detail'] = re.sub('\\[\\[([^\\[\\]]*)\\]\\]','<a href="detail.html?title=\\1">\\1</a>',answer['detail'])
+		else:
+			ctx['detail'] = re.sub('[\\[\\]]','',answer['detail'])
 		ctx['title'] = answer['title']
 		image = answer['image']
 
-		ctx['image'] = '<img src="' + str(image) + '" alt="该条目无图片" height="100%" width="100%" >'
+		if image != "":
+			ctx['image'] = '<img src="' + str(image) + '" alt="该条目无图片" height="100%" width="100%" >'
 
 		ctx['baseInfoValueList'] = []
 		ctx['baseInfoKeyList'] = []
 		List = answer['infobox'].split('##')[1:]
-		for p in List:
-			if len(p.split('=')) > 1:
-				ctx['baseInfoKeyList'].append(p.split('=')[0])
-				ctx['baseInfoValueList'].append(p.split('=')[1])
+		if answer_type == "csNode":
+			for p in List:
+				if len(p.split('=')) > 1:
+					ctx['baseInfoKeyList'].append(p.split('=')[0])
+					ctx['baseInfoValueList'].append(re.sub('\\[\\[([^\\[\\]]*)\\]\\]','<a href="detail.html?title=\\1">\\1</a>',p.split('=')[1]))
+		else:
+			for p in List:
+				if len(p.split('=')) > 1:
+					ctx['baseInfoKeyList'].append(p.split('=')[0])
+					ctx['baseInfoValueList'].append(re.sub('[\\[\\]]','',p.split('=')[1]))
+
 
 		text = ""
 		keyList = ctx['baseInfoKeyList']
@@ -75,13 +93,14 @@ def showdetail(request):
 			text = ''
 		ctx['baseInfoTable'] = text
 
-		tagcloud = ""
-		taglist = wv_model.get_simi_top(answer['title'], 10)
-		for tag in taglist:
-			tagcloud += '<a href= "./detail.html?title=' + str(tag) + '"> '
-			tagcloud += str(tag) + "</a>"
+		if answer_type == "csNode":
+			tagcloud = ""
+			taglist = wv_model.get_simi_top(answer['title'], 10)
+			for tag in taglist:
+				tagcloud += '<a href= "./detail.html?title=' + str(tag) + '"> '
+				tagcloud += str(tag) + "</a>"
 #			print(tag)
-		ctx['tagcloud'] = tagcloud
+			ctx['tagcloud'] = tagcloud
 
 		agri_type = ""
 		ansList = tree.get_path(answer['title'], True)
@@ -97,15 +116,16 @@ def showdetail(request):
 
 			agri_type += '</p>'
 		if len(ansList) == 0:
-			agri_type = '<p > 暂无农业类型</p>'
+			agri_type = '<p > 暂无类型</p>'
 		ctx['agri_type'] = agri_type
 
-		entity_type = ""
-		explain = get_explain(predict_labels[answer['title']])
-		detail_explain = get_detail_explain(predict_labels[answer['title']])
-		entity_type += '<p > [' + explain + "]: "
-		entity_type += detail_explain + "</p>"
-		ctx['entity_type'] = entity_type
+		if answer_type == "csNode":
+			entity_type = ""
+			explain = get_explain(predict_labels[answer['title']])
+			detail_explain = get_detail_explain(predict_labels[answer['title']])
+			entity_type += '<p > [' + explain + "]: "
+			entity_type += detail_explain + "</p>"
+			ctx['entity_type'] = entity_type
 
 	else:
 		return render(request, "404.html", ctx)
