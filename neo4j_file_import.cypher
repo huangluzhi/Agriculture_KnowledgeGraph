@@ -42,7 +42,7 @@ ASSERT c.title IS UNIQUE
 //导入csNode和自身之间的关系 (done)
 LOAD CSV  WITH HEADERS FROM "file:///wikidata_relation.csv" AS line
 MATCH (entity1:csNode{title:line.csNode1}) , (entity2:csNode{title:line.csNode2})
-CREATE (entity1)-[:RELATION { type: line.relation }]->(entity2)
+CREATE (entity1)-[:cs2cs { type: line.relation }]->(entity2)
 
 //导入csNode和wikiNode之间的关系 (done)
 LOAD CSV  WITH HEADERS FROM "file:///wikidata_relation2.csv" AS line
@@ -52,21 +52,21 @@ CREATE (entity1)-[:cs2wiki { type: line.relation }]->(entity2)
 //导入csNode和singleNode之间的关系
 LOAD CSV  WITH HEADERS FROM "file:///wikidata_relation2.csv" AS line
 MATCH (entity1:csNode{title:line.csNode}) , (entity2:singleNode{title:line.NewNode})
-CREATE (entity1)-[:cs2wiki { type: line.relation }]->(entity2)
+CREATE (entity1)-[:cs2single { type: line.relation }]->(entity2)
 
 
 
-//导入csNode和(wikiNode)之间的关系 (done)
+//导入csNode和(csNode)之间的关系 (done)
 LOAD CSV  WITH HEADERS FROM "file:///zhwiki-CS-relationAttribute.csv" AS line
 MATCH (entity1:csNode{title:line.entity1}) , (entity2:csNode{title:line.entity2})
-CREATE (entity1)-[:RELATION { type: line.attribute }]->(entity2)
+CREATE (entity1)-[:cs2cs { type: line.attribute }]->(entity2)
 
 //导入csNode和(wikiNode)之间的关系 (done)
 LOAD CSV  WITH HEADERS FROM "file:///zhwiki-CS-relationAttribute.csv" AS line
 MATCH (entity1:csNode{title:line.entity1}) , (entity2:wikiNode{title:line.entity2})
 CREATE (entity1)-[:cs2wiki { type: line.attribute }]->(entity2)
 
-//导入csNode和(wikiNode)之间的关系 (done)
+//导入csNode和(wikiNode)之间的关系(entity2需要去除双引号") (done)
 LOAD CSV  WITH HEADERS FROM "file:///zhwiki-CS-normalAttribute.csv" AS line
 MATCH (entity1:csNode{title:line.entity1}) , (entity2:wikiNode{title:line.entity2})
 CREATE (entity1)-[:cs2wiki { type: line.attribute }]->(entity2)
