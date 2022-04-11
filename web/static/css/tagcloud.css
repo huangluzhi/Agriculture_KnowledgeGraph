@@ -3,7 +3,10 @@
  * Copyright 2016 @ Cong Min , Inc.
  * MIT License - https://github.com/mcc108/tagcloud
  */
+
+
 /* base */
+
 .tagcloud {
     visibility: hidden;
     display: block;
@@ -13,7 +16,8 @@
     margin: 0;
     padding: 0;
 }
-.tagcloud > a {
+
+.tagcloud>a {
     position: absolute;
     top: 0;
     left: 0;
@@ -23,20 +27,25 @@
     padding: 2px 4px;
     background-color: transparent;
     border: 1px solid transparent;
-    color: #333;
+    color: var(--text-color);
 }
-.tagcloud > a:hover {
+
+.tagcloud>a:hover {
     background-color: rgba(180, 180, 180, .15);
     border: 1px solid #666;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
 }
+
+
 /* light */
-.tagcloud.tagcloud-light > a {
+
+.tagcloud.tagcloud-light>a {
     color: #fff;
 }
-.tagcloud.tagcloud-light > a:hover {
+
+.tagcloud.tagcloud-light>a:hover {
     background-color: rgba(255, 255, 255, .1);
     border: 1px solid #fff;
 }

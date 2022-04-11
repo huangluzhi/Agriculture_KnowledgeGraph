@@ -12,11 +12,11 @@
     <!--head start-->
 
     <div class = "col-md-12">
-    	<div class = "panel panel-default">
-			<header class="panel-heading">
+    	<div class = "card card-default">
+			<header class="card-header">
             查询条件：
        		</header>
-       		<div class = "panel-body">
+       		<div class = "card-body">
 
 			    <form  id ="searchRelationForm" class="form-inline" style="padding-left: 10% ; padding-right: 10%" method="get">
 			    	<div id = "entity1" class="form-group" style="padding: 2%">
@@ -55,11 +55,11 @@
 	</div>
 	{% if ctx %}
 	<div class = "col-md-12">
-		<div class = "panel panel-default">
-			<header class = "panel-heading">
+		<div class = "card card-default">
+			<header class = "card-header">
 				查询结果：
 			</header>
-			<div class = "panel-body">
+			<div class = "card-body">
 				<div style="padding: 2%">
 					<h2>暂未找到相应的匹配</h2>
 				</div>
@@ -72,22 +72,22 @@
 
     <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
     <div class = "col-md-12">
-        <div class="panel panel-default ">
-	        <header class="panel-heading">
+        <div class="card card-default ">
+	        <header class="card-header">
 	            关系图 :
 	        </header>
-            <div class = "panel-body ">
+            <div class = "card-body ">
                 <div id="graph" style="width: 100%;height:600px;"></div>
             </div>
         </div>
     </div>
     <!-- Footable -->
     <div class = "col-md-12">
-	    <div class="panel panel-default">
-	    	<header class="panel-heading">
+	    <div class="card card-default">
+	    	<header class="card-header">
 	       	 关系列表 :
 	   		</header>
-	        <div class = "panel-body">
+	        <div class = "card-body">
 	            <table class = "table" data-paging =  "true" data-sorting="true"></table>
 	        </div>
 	    </div>

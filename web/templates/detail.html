@@ -10,10 +10,10 @@
             {% autoescape off %}
             <div class="row">
                 <div class="col-md-9">
-                    <div class="panel panel-default">
+                    <div class="card card-default">
 
                         <!--代表将html标签文本转义成标签显示-->
-                        <div class="panel-body">
+                        <div class="card-body">
                             <div class="page-header">
                                 <h1>{{ title }}</h1>
                                 {{ categories }}
@@ -39,10 +39,11 @@
                     </div>
                 </div>
 
+                {% if answer_type == 'csNode' %}
                 <div class="col-md-3">
-                    <div class="panel panel-default">
+                    <div class="card card-default">
                         <!--词云面板-->
-                        <div class="panel-body">
+                        <div class="card-body">
                             <h4>相关概念：</h4>
                             <!-- begin -->
                             <div class="tagcloud">
@@ -52,9 +53,9 @@
                             <!-- end -->
                         </div>
                     </div>
-                    <div class="panel panel-default">
+                    <div class="card card-default">
                         <!--类型：-->
-                        <div class="panel-body">
+                        <div class="card-body">
                             <h4>类型：</h4>
                             <!-- begin -->
                             {{ agri_type }}
@@ -63,9 +64,9 @@
                         </div>
 
                     </div>
-                    <div class="panel panel-default">
+                    <div class="card card-default">
                         <!--类型：-->
-                        <div class="panel-body">
+                        <div class="card-body">
                             <h4>实体类型：</h4>
                             <!-- begin -->
 
@@ -75,6 +76,7 @@
                     </div>
 
                 </div>
+                {% endif %}
             </div>
             {% endautoescape %}
         </div>

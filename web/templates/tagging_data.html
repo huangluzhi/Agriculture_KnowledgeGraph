@@ -6,10 +6,10 @@
         <div class="col-sm-1"></div>
         <div class="col-sm-6">
             <br/>
-            <div class="panel panel-default">
+            <div class="card card-default">
                 {% autoescape off %}
                 <!--代表将html标签文本转义成标签显示-->
-                <div class="panel-body">
+                <div class="card-body">
                     <p class="card-title">
                         <h1>{{ title }}</h1>
                         {{ categories }}
@@ -34,8 +34,8 @@
         <div class="col-sm-4">
             {% autoescape off %}
             <br/>
-            <div class="panel panel-default">
-                <div class="panel-body">
+            <div class="card card-default">
+                <div class="card-body">
                     <form action="tagging-get" method="get">
                         {{ taggingCheck }}
 

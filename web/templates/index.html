@@ -6,50 +6,48 @@
 
             <!--overview start-->
 
-            <section class="panel panel-default">
-                <header class="panel-heading">
+            <section class="card">
+                <header class="card-header">
                     输入文本 :
                 </header>
-                <div class="panel-body">
+                <div class="card-body">
                     <form action="/ER-post" method="post">
                         <div class="form-group">
                             {% csrf_token %}
                             <textarea type="text" name="user_text" class="form-control" placeholder="Enter text" style="height:140px"> </textarea>
                         </div>
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4">
-                            <button type="submit" class="btn-primary btn-lg btn-block"> 提交！ </button>
+                        <div style="margin-top: 1rem" >
+                            <button type="submit" class="btn btn-primary"> 提交 </button>
                         </div>
-                        <div class="col-md-4"></div>
                     </form>
                 </div>
             </section>
             <!--collapse start-->
-            <div class="panel-group m-bot20" id="accordion">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
+            <div class="m-bot20" id="accordion">
+                <div class="card card-default">
+                    <div class="card-header">
                         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
                                     [查看识别结果]
                         </a>
                     </div>
-                    <div id="collapseOne" class="panel-collapse collapse in">
-                        <div class="panel-body">
+                    <div id="collapseOne" class="card-collapse collapse in">
+                        <div class="card-body">
                             {% autoescape off %}
                             <h5>{{ rlt }}</h5>
                             {% endautoescape %}
                         </div>
                     </div>
                 </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
+                <div class="card card-default">
+                    <div class="card-header">
 
                         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
                                     [查看分词结果]
                             </a>
 
                     </div>
-                    <div id="collapseTwo" class="panel-collapse collapse">
-                        <div class="panel-body">
+                    <div id="collapseTwo" class="card-collapse collapse">
+                        <div class="card-body">
                             {% autoescape off %}
                             <h5> {{ seg_word }}</h5>
                             {% endautoescape %}

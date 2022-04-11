@@ -1,0 +1,128 @@
+/*
+  --mask-bg: rgb(68, 69, 70);
+  --main-wrapper-bg: rgb(27, 27, 30);
+  --main-border-color: rgb(44, 45, 45); */
+
+.card {
+    margin-top: 2rem;
+    border-color: var(--card-border-color);
+    background-color: var(--card-bg);
+    box-shadow: 0 0 5px 0 var(--card-box-shadow);
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.card-header {
+    background-color: var(--search-wrapper-bg);
+}
+
+.form-control {
+    background-color: var(--main-wrapper-bg);
+    border-color: var(--main-border-color);
+    color: var(--text-color);
+}
+
+.form-control:focus {
+    background-color: var(--card-bg);
+    /* border-color: var(--main-border-color); */
+    color: var(--text-color);
+}
+
+.btn {
+    /* padding: 2px 3px; */
+    /* margin-top: 1rem; */
+    border-radius: 3px;
+    color: var(--link-color);
+    background-color: var(--search-wrapper-bg);
+    border: 1px solid;
+    border-color: var(--btn-border-color);
+}
+
+button:hover {
+    background: #2a408e;
+    color: #fff;
+    border-color: #2a408e;
+}
+
+button {
+    pointer-events: auto;
+    cursor: not-allowed;
+    background: none;
+    color: gray;
+}
+
+button.disabled:hover {
+    border-color: none;
+}
+
+
+/* .table-hover tbody tr:hover */
+
+.table {
+    color: var(--text-color);
+    --bs-table-striped-color: var(--text-color);
+    --bs-table-hover-color: var(--text-color);
+    table-layout: fixed;
+    /* border-color: var(--main-border-color) */
+}
+
+.table-hover tbody tr:hover {
+    color: var(--text-color);
+}
+
+.tagcloud>a:hover {
+    color: var(--link-color);
+    /* color: var(--link-underline-color); */
+}
+
+
+/*404 page*/
+
+.page-404 {
+    position: relative;
+    width: 350px;
+    height: 200px;
+    margin: 100px auto;
+    text-align: center;
+}
+
+.text-404 {
+    font-size: 138px;
+    background: #e9e3dd;
+    /* background-image: url('https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQTdWeWNteABnbzguiXSBxmfc8Z8nh_HHoWoK35QL81x4HnpVmgvQ'); */
+    background-repeat: no-repeat;
+    background-size: 200% 200%;
+    background-position: 100% 100%;
+    -webkit-animation: square 3s linear infinite;
+    -ms-animation: square 3s linear infinite;
+    animation: square 3s linear infinite;
+    -webkit-background-clip: text;
+    /* color: transparent; */
+    text-align: center;
+    line-height: 200px;
+    position: relative;
+}
+
+.text-404:nth-of-type(2) {
+    text-shadow: none;
+    z-index: 2;
+    position: absolute;
+    top: -139px;
+    left: -1px;
+}
+
+.footable .pagination>.disabled>a,
+.footable .pagination>.disabled>span,
+.footable .pagination>li>a,
+.footable .pagination>li>span {
+    border-color: var(--card-border-color);
+    background-color: var(--card-bg);
+    color: var(--link-color);
+}
+
+.badge {
+    font-weight: 550;
+    border: 2px solid;
+    border-color: gray
+}

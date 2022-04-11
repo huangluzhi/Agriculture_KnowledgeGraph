@@ -58,6 +58,8 @@ def showdetail(request):
 					ctx['baseInfoKeyList'].append(p.split('=')[0])
 					ctx['baseInfoValueList'].append(re.sub('[\\[\\]]','',p.split('=')[1]))
 
+		ctx['answer_type'] = answer_type
+
 
 		text = ""
 		keyList = ctx['baseInfoKeyList']

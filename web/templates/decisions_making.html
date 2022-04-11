@@ -11,11 +11,11 @@
             <div class="row">
             <div class="col-md-3">
 
-                <section class="panel panel-default">
-                    <header class="panel-heading">
+                <section class="card card-default">
+                    <header class="card-header">
                         拍照上传 :
                     </header>
-                    <div class="panel-body">
+                    <div class="card-body">
                         <form action="/decision" method="post">
                             {% csrf_token %}
                         <a href="#" class="thumbnail">
@@ -23,16 +23,16 @@
                         </a>
                         <input name="img_base64" id="img_base64" class="form-control" style="display: none" > </input>
                         <input id="img_upload_file" type="file" onchange="handleSelected()"/>
-                        <button type="submit" class="btn-primary btn-block"> Match! </button>
+                        <button type="submit" class="btn btn-primary btn-block"> Match! </button>
                         </form>
                     </div>
 
                 </section>
-                <section class="panel panel-default">
-                    <header class="panel-heading">
+                <section class="card card-default">
+                    <header class="card-header">
                         其它匹配结果 :
                     </header>
-                    <div class="panel-body">
+                    <div class="card-body">
                         {% autoescape off %}
                         {{ other_match }}
                         {% endautoescape %}
@@ -43,11 +43,11 @@
                 </section>
             </div>
             <div class="col-md-9">
-                <section class="panel panel-default">
-                    <header class="panel-heading">
+                <section class="card card-default">
+                    <header class="card-header">
                          最优匹配结果：
                     </header>
-                    <div class="panel-body">
+                    <div class="card-body">
                         {% autoescape off %}
                         {{ best_match }}
                         {% endautoescape %}
@@ -55,11 +55,11 @@
                 </section>
 
                 <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-                <div class="panel panel-default ">
-                    <header class="panel-heading">
+                <div class="card card-default ">
+                    <header class="card-header">
                         关系图 :
                     </header>
-                    <div class = "panel-body ">
+                    <div class = "card-body ">
                         <div id="graph" style="width: 90%;height:450px;"></div>
                     </div>
                 </div>

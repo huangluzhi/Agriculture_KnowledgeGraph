@@ -4,10 +4,10 @@
         <div class="col-sm-1"></div>
         <div class="col-sm-9">
             <br/>
-            <div class="panel panel-default">
+            <div class="card card-default">
 
                 <!--代表将html标签文本转义成标签显示-->
-                <div class="panel-body">
+                <div class="card-body">
                     <p class="card-title">
                         <h1>Statement</h1>
                         <hr/>
@@ -19,8 +19,8 @@
 
             <div class="col-sm-13">
             <br/>
-            <div class="panel panel-default">
-                <div class="panel-body">
+            <div class="card card-default">
+                <div class="card-body">
                 <p class="card-title">
                     <h1>Choose Label:</h1>
                     <hr/>
@@ -34,7 +34,7 @@
 
 	                            </a>
 	                        </div> -->
-                    
+
 
 	                     <!-- relation is true -->
                         <a type="button" id="tagging-true-btn" class="btn btn-success btn-lg">&nbsp&nbsp<strong>True</strong>&nbsp&nbsp</a>&nbsp&nbsp&nbsp&nbsp
@@ -45,7 +45,7 @@
                     	</br></br></br>
                    		<!--if relation is false , choose one or enter another relation-->
 
-	                        <div class="radio">							  
+	                        <div class="radio">
 								  <label>
 								  		<h4><input type="radio" name="optionsRadios" value="Instance of" id="Instanceof" checked>
 								    	<span><strong> Instance of </strong> </span> </h4>
@@ -59,14 +59,14 @@
 							 	</label>
 							 </div>
 							 <br>
-							 <div class="radio">							  
+							 <div class="radio">
 								  <label>
 								  		<h4><input type="radio" name="optionsRadios" value="Country" id="Country" >
 								    	<span><strong> Country </strong> </span> </h4>
 								  </label>
 							</div>
 							</br>
-							 <div class="radio">							  
+							 <div class="radio">
 								  <label>
 								  		<h4><input type="radio" name="optionsRadios" value="Taxon rank" id="Taxonrank" >
 								    	<span><strong> Taxon rank </strong> </span> </h4>
@@ -74,7 +74,7 @@
 							</div>
 							</br>
 
-							 <div class="radio">							  
+							 <div class="radio">
 								  <label>
 								  		<h4><input type="radio" name="optionsRadios" value="Subclass of" id="Subclassof" >
 								    	<span><strong> Subclass of </strong> </span> </h4>
@@ -82,7 +82,7 @@
 							</div>
 							</br>
 
-							 <div class="radio">							  
+							 <div class="radio">
 								  <label>
 								  		<h4><input type="radio" name="optionsRadios" value="Has part" id="Haspart" >
 								    	<span><strong> Has part </strong> </span> </h4>
@@ -90,7 +90,7 @@
 							</div>
 							</br>
 
-							 <div class="radio">							  
+							 <div class="radio">
 								  <label>
 								  		<h4><input type="radio" name="optionsRadios" value="Parent taxon" id="Parenttaxon" >
 								    	<span><strong> Parent Taxon </strong> </span> </h4>
@@ -98,7 +98,7 @@
 							</div>
 							</br>
 
-							 <div class="radio">							  
+							 <div class="radio">
 								  <label>
 								  		<h4><input type="radio" name="optionsRadios" value="Part of" id="Sexorgender" >
 								    	<span><strong> Sex or gender </strong> </span> </h4>
@@ -106,7 +106,7 @@
 							</div>
 							</br>
 
-							 <div class="radio">							  
+							 <div class="radio">
 								  <label>
 								  		<h4><input type="radio" name="optionsRadios" value="Part of" id="Partof" >
 								    	<span><strong> Part of </strong> </span> </h4>
@@ -114,7 +114,7 @@
 							</div>
 							</br>
 
-							 <div class="radio">							  
+							 <div class="radio">
 								  <label>
 								  		<h4><input type="radio" name="optionsRadios" value="Different from" id="Differentfrom" >
 								    	<span><strong> Different from </strong> </span> </h4>
@@ -122,7 +122,7 @@
 							</div>
 							</br>
 
-							 <div class="radio">							  
+							 <div class="radio">
 								  <label>
 								  		<h4><input type="radio" value="Found in taxon" name="optionsRadios" id="Foundintaxon">
 								    	<span><strong> Found in taxon </strong> </span> </h4>
@@ -130,13 +130,13 @@
 							</div>
 							</br>
 
-							 <div class="radio">							  
+							 <div class="radio">
 								  <label>
 								  		<h4><input type="radio" value="Other relation" name="optionsRadios" id="Otherrelation">
 								    	<span><strong> 其他关系 </strong> </span> </h4>
 								  </label>
 							</div>
-	
+
 							<div>
 	                       	　 	<input type="text" class="form-control" placeholder="其他关系" disabled>
                     		</div>
@@ -144,7 +144,7 @@
 							<button id="tagging-false-btn" class="btn float-right btn-success btn-lg">&nbsp&nbsp<strong>Submit</strong>&nbsp&nbsp</button>
 
 
-                        
+
                 </form>
 
             </div>
@@ -161,7 +161,7 @@
 
          				</div>
 				        <div class="modal-body">
-				            already 
+				            already
 				        </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
@@ -219,7 +219,7 @@
 	let relation = document.querySelector('#relation');
 
 
-	
+
 
 
 	function submitTagTrue() {

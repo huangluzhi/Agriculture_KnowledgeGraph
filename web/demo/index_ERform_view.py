@@ -10,6 +10,7 @@ from toolkit.NER import get_NE,temporaryok,get_explain,get_detail_explain
 # 读取实体解析的文本
 def ER_post(request):
 	ctx ={}
+	ctx['breadcrumb'] = [['Home','\\'],['命名实体识别']]
 	if request.POST:
 		key = request.POST['user_text']
 		thu1 = pre_load_thu  #提前加载好了
