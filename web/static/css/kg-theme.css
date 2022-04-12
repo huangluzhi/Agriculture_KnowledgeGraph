@@ -39,10 +39,9 @@
     border-color: var(--btn-border-color);
 }
 
-button:hover {
-    background: #2a408e;
-    color: #fff;
-    border-color: #2a408e;
+button.close {
+    color: var(--text-color);
+    /* color: -internal-light-dark; */
 }
 
 button {
@@ -50,6 +49,12 @@ button {
     cursor: not-allowed;
     background: none;
     color: gray;
+}
+
+button:hover {
+    background: #2a408e;
+    color: #fff;
+    border-color: #2a408e;
 }
 
 button.disabled:hover {
@@ -125,4 +130,41 @@ button.disabled:hover {
     font-weight: 550;
     border: 2px solid;
     border-color: gray
+}
+
+.modal {
+    color: var(--main-wrapper-bg)
+}
+
+.modal-backdrop {
+    filter: alpha(opacity=0.5)!important;
+    opacity: 0.5!important;
+}
+
+.tree {
+    color: var(--text-color);
+    background-color: var(--search-wrapper-bg);
+}
+
+.modal-content {
+    background-color: var(--main-wrapper-bg);
+    border-color: var(--main-border-color);
+}
+
+.modal-header {
+    border-bottom-color: var(--main-border-color);
+}
+
+.modal-footer {
+    border-top-color: var(--main-border-color);
+}
+
+.dropdown-item, ul.dropdown-menu {
+    color: var(--text-color);
+    background-color: var(--main-wrapper-bg);
+}
+
+.dropdown-item:hover {
+    color: var(--text-color);
+    background-color: var(--mask-bg);
 }

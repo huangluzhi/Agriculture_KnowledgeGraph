@@ -35,8 +35,9 @@ wv_model.read_vec(filePath+'/toolkit/vector_15.txt') # 降到15维了
 
 # 读取农业层次树
 tree = TREE()
-tree.read_edge(filePath+'/toolkit/micropedia_tree.txt')
+tree.read_edge(filePath+'/toolkit/wikipedia_tree.txt')
 tree.read_leaf(filePath+'/toolkit/leaf_list.txt')
+tree.create_UI()
 
 print('level tree load over~~~')
 

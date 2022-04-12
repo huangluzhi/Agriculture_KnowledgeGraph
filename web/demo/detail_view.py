@@ -21,10 +21,14 @@ def showdetail(request):
 		title = request.GET['title']
 		answer_type = "csNode"
 		answer = db.matchcsNodebyTitle(title)
-		print(answer)
+		if answer == []:
+			answer = db.matchcsNodebyTitle(re.sub('_', ' ', title))
+
 		if answer == []:
 			answer = db.matchwikiNodebyTitle(title)
 			answer_type = "wikiNode"
+		if answer == []:
+			answer = db.matchwikiNodebyTitle(re.sub('_', ' ', title))
 		if answer == []:
 			return render(request, "404.html", ctx)
 
@@ -114,7 +118,7 @@ def showdetail(request):
 					flag = 0
 				else:
 					agri_type += ' / '
-				agri_type += str(p)
+				agri_type += '<a href= "./overview.html?node=' + str(p) + '">' + str(p) + '</a>'
 
 			agri_type += '</p>'
 		if len(ansList) == 0:

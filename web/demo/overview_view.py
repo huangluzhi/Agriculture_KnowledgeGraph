@@ -87,7 +87,7 @@ def show_overview(request):
 		ctx['branch'] = branch
 
 		# 分类树构建
-		level_tree = tree.create_UI(node)
+		level_tree = tree.show_UI(node)
 		ctx['level_tree'] = level_tree
 
 

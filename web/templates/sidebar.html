@@ -3,78 +3,82 @@
 -->
 
 <div id="sidebar" class="d-flex flex-column align-items-end">
-  <div class="profile-wrapper text-center">
-    <div id="avatar">
-      <a href="/" alt="avatar" class="mx-auto">
-          <img src="static/img/avatar.jpg" alt="avatar" onerror="this.style.display='none'">
-      </a>
+    <div class="profile-wrapper text-center">
+        <div id="avatar">
+            <a href="/" alt="avatar" class="mx-auto">
+                <img src="static/img/avatar.jpg" alt="avatar" onerror="this.style.display='none'">
+            </a>
+        </div>
+
+        <div class="site-title mt-3">
+            <a href="/">知识图谱</a>
+        </div>
+        <div class="site-subtitle font-italic">计算机数据科学</div>
+
     </div>
+    <!-- .profile-wrapper -->
 
-    <div class="site-title mt-3">
-      <a href="/">知识图谱</a>
-    </div>
-    <div class="site-subtitle font-italic">计算机数据科学</div>
+    <ul class="w-100">
 
-  </div><!-- .profile-wrapper -->
+        <!-- home -->
+        <li class="nav-item active">
+            <a href="/" class="nav-link">
+                <i class="fa-fw fas fa-search ml-xl-3 mr-xl-3 unloaded"></i>
+                <span>实体识别</span>
+            </a>
+        </li>
+        <li class="nav-item active">
+            <a href="/search_entity" class="nav-link">
+                <i class="fa-fw fas fa-share ml-xl-3 mr-xl-3 unloaded"></i>
+                <span>实体查询</span>
+            </a>
+        </li>
+        <li class="nav-item active">
+            <a href="/search_relation" class="nav-link">
+                <i class="fa-fw fas fa-link ml-xl-3 mr-xl-3 unloaded"></i>
+                <span>关系查询</span>
+            </a>
+        </li>
+        <li class="nav-item active">
+            <a href="/overview?node=计算机编程" class="nav-link">
+                <i class="fa-fw fas fa-sitemap ml-xl-3 mr-xl-3 unloaded"></i>
+                <span>计算机知识概览</span>
+            </a>
+        </li>
+        <li class="nav-item active">
+            <a href="/qa" class="nav-link">
+                <i class="fa-fw fas fa-comments ml-xl-3 mr-xl-3 unloaded"></i>
+                <span>知识问答</span>
+            </a>
+        </li>
+        <li class="nav-item active">
+            <a href="/decision" class="nav-link">
+                <i class="fa-fw fas fa-images ml-xl-3 mr-xl-3 unloaded"></i>
+                <span>图片检索</span>
+            </a>
+        </li>
+        <!-- the real tabs -->
 
-  <ul class="w-100">
+    </ul>
+    <!-- ul.nav.flex-column -->
 
-    <!-- home -->
-    <li class="nav-item active">
-      <a href="/" class="nav-link">
-        <i class="fa-fw fas fa-search ml-xl-3 mr-xl-3 unloaded"></i>
-        <span>实体识别</span>
-      </a>
-    </li>
-    <li class="nav-item active">
-      <a href="/search_entity" class="nav-link">
-        <i class="fa-fw fas fa-share ml-xl-3 mr-xl-3 unloaded"></i>
-        <span>实体查询</span>
-      </a>
-    </li>
-    <li class="nav-item active">
-      <a href="/search_relation" class="nav-link">
-        <i class="fa-fw fas fa-link ml-xl-3 mr-xl-3 unloaded"></i>
-        <span>关系查询</span>
-      </a>
-    </li>
-    <li class="nav-item active">
-      <a href="/overview?node=数据科学" class="nav-link">
-        <i class="fa-fw fas fa-sitemap ml-xl-3 mr-xl-3 unloaded"></i>
-        <span>科学知识概览</span>
-      </a>
-    </li>
-    <li class="nav-item active">
-      <a href="/qa" class="nav-link">
-        <i class="fa-fw fas fa-comments ml-xl-3 mr-xl-3 unloaded"></i>
-        <span>知识问答</span>
-      </a>
-    </li>
-    <li class="nav-item active">
-      <a href="/decision" class="nav-link">
-        <i class="fa-fw fas fa-images ml-xl-3 mr-xl-3 unloaded"></i>
-        <span>图片检索</span>
-      </a>
-    </li>
-    <!-- the real tabs -->
+    <div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center align-items-center">
 
-  </ul> <!-- ul.nav.flex-column -->
-
-  <div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center align-items-center">
-
-      <button class="mode-toggle btn" aria-label="Switch Mode">
+        <button class="mode-toggle btn" aria-label="Switch Mode">
         <i class="fas fa-adjust"></i>
       </button>
 
         <span class="icon-border"></span>
 
-            <a href="https://github.com/huangluzhi" aria-label="github" target="_blank" rel="noopener">
-                <i class="fab fa-github"></i>
-            </a>
-            <a href=" javascript:location.href = 'mailto:' + ['rex.t.huang','gmail.com'].join('@')" aria-label="email">
-                <i class="fas fa-envelope"></i>
-            </a>
+        <a href="https://github.com/huangluzhi" aria-label="github" target="_blank" rel="noopener">
+            <i class="fab fa-github"></i>
+        </a>
+        <a href=" javascript:location.href = 'mailto:' + ['rex.t.huang','gmail.com'].join('@')" aria-label="email">
+            <i class="fas fa-envelope"></i>
+        </a>
 
-  </div> <!-- .sidebar-bottom -->
+    </div>
+    <!-- .sidebar-bottom -->
 
-</div><!-- #sidebar -->
+</div>
+<!-- #sidebar -->
