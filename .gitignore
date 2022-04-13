@@ -105,4 +105,4 @@ demo/.idea/*
 .idea/*
 
 # vector file
-KNN_predict/wiki.zh*
+wiki.zh*
