@@ -22,7 +22,7 @@ class entitiesSpider(scrapy.spiders.Spider):
 		entityNumberList = list()
 		jsonItemList = list()
 		entityCount = 0
-		with open('./zhwiki-CS-title.txt','r') as f:
+		with open('./zhwiki-csTitle.txt','r') as f:
 			for line in f:
 				entity = line.split(" ")[0]
 				if(len(line.split(" ")) >= 2):

@@ -9,7 +9,7 @@ def read_word():
 	for f in file_object:
 		all_list.append(f)
 	return all_list
-	
+
 # 标注不合法数据
 def is_num(s):
 	flag = True
@@ -31,8 +31,8 @@ def only_num_letter(s):
 			pass
 		else:
 			flag =False
-	return flag	
-		
+	return flag
+
 def create_invalid():
 	all_list = read_word()
 	file_object = open('invalid2.txt','w')
@@ -45,15 +45,15 @@ def create_invalid():
 		if only_num_letter(word):
 			file_object.write(word+" 0\n")
 	file_object.close()
-	
+
 #create_invalid()
-	
+
 # 标注人物
 def surname_table():
 	table = set({'李','王','张','刘','陈','杨','赵','周','吴','徐','孙','胡','朱','何','郭'})
 	#李、王、张、刘、陈、杨、赵、黄、周、吴、徐、孙、胡、朱、高、林、何、郭和马
 	return table
-	
+
 def create_person():  ##最后还是只检查了100个，因为姓名很容易看错
 	all_list = read_word()
 	file_object = open('person.txt','w')
@@ -70,7 +70,7 @@ def create_person():  ##最后还是只检查了100个，因为姓名很容易�
 def loc_table():
 	table = set({'国','市','区','县','省'})
 	return table
-	
+
 def create_location():  ##只检查了200个
 	all_list = read_word()
 	file_object = open('location.txt','w')
@@ -89,7 +89,7 @@ def is_org(s):
 	if '大学' in s or '学院' in s or '委员会' in s or '公司' in s or '论坛' in s or '大会' in s:
 		return True
 	return False
-	
+
 def create_organization():  ##
 	all_list = read_word()
 	file_object = open('organization.txt','w')
@@ -98,16 +98,16 @@ def create_organization():  ##
 		if is_org(word) :
 			file_object.write(word+" 3\n")
 	file_object.close()
-	
+
 #create_organization()
-	
+
 # 标注政治经济名词
 def is_eco(s):
 	table = set({'税','经济','条例','补贴','投资'})
 	if '税' in s or '经济' in s or '条例' in s or '补贴' in s or '投资' in s or '政策' in s:
 		return True
 	return False
-	
+
 def create_econo():  ##
 	all_list = read_word()
 	file_object = open('Political_economy.txt','w')
@@ -116,14 +116,14 @@ def create_econo():  ##
 		if is_eco(word) :
 			file_object.write(word+" 4\n")
 	file_object.close()
-	
+
 #create_econo()
-	
+
 # 标注动物
 def ani_table():
 	table = set({'牛','羊','鸡','鸟','狗','犬','虫','鱼','鸭','猫','蛙'})
 	return table
-	
+
 def create_animal():  ##只检查了200个
 	all_list = read_word()
 	file_object = open('Animal.txt','w')
@@ -133,14 +133,14 @@ def create_animal():  ##只检查了200个
 		if word[len(word)-1] in ani :
 			file_object.write(word+" 5\n")
 	file_object.close()
-	
+
 #create_animal()
-	
+
 # 标注植物
 def plant_table():
 	table = set({'草','花','果','桃','菇','麦','米','菜'})
 	return table
-	
+
 def create_plant():  ##只检查了200个
 	all_list = read_word()
 	file_object = open('Plant.txt','w')
@@ -150,14 +150,14 @@ def create_plant():  ##只检查了200个
 		if word[len(word)-1] in plant :
 			file_object.write(word+" 6\n")
 	file_object.close()
-	
+
 #create_plant()
-	
+
 # 标注化学物质
 def che_table():
 	table = set({'剂','肥','盐','油','碳','气','液','氮','氯'})
 	return table
-	
+
 def create_chemicals():  ##只检查了200个
 	all_list = read_word()
 	file_object = open('Chemicals.txt','w')
@@ -167,15 +167,15 @@ def create_chemicals():  ##只检查了200个
 		if word[len(word)-1] in che :
 			file_object.write(word+" 7\n")
 	file_object.close()
-	
+
 #create_chemicals()
-	
+
 # 标注气候季节
 def is_cli(s):
 	if '春天' in s or '夏天' in s or '秋天' in s or '冬天' in s or '旱' in s or '雨' in s or '雾' in s or '雪' in s  or '季节' in s:
 		return True
 	return False
-	
+
 def create_climate():  ##
 	all_list = read_word()
 	file_object = open('Climate.txt','w')
@@ -184,15 +184,15 @@ def create_climate():  ##
 		if is_cli(word) :
 			file_object.write(word+" 8\n")
 	file_object.close()
-	
+
 #create_climate()
-	
+
 # 标注动植物产品
 def is_food(s):
 	if '烤' in s or '煮' in s or '汤' in s or '饼' in s or '米粉' in s or '奶' in s or '面' in s or '酱' in s  or '衣' in s:
 		return True
 	return False
-	
+
 def create_foodItem():  ##
 	all_list = read_word()
 	file_object = open('foodItem.txt','w')
@@ -201,14 +201,14 @@ def create_foodItem():  ##
 		if is_food(word) :
 			file_object.write(word+" 9\n")
 	file_object.close()
-	
+
 #create_foodItem()
-	
+
 # 标注动植物疾病
 def dis_table():
 	table = set({'病','症','痛','疼','衰'})
 	return table
-	
+
 def create_disease():  ##只检查了200个
 	all_list = read_word()
 	file_object = open('disease.txt','w')
@@ -218,7 +218,7 @@ def create_disease():  ##只检查了200个
 		if word[len(word)-1] in dis :
 			file_object.write(word+" 10\n")
 	file_object.close()
-	
+
 #create_disease()
 
 # 标注营养素
@@ -226,7 +226,7 @@ def is_nut(s):
 	if '营养' in s or '维生素' in s or '矿物质' in s or '脂肪' in s or '碳水化合物' in s:
 		return True
 	return False
-	
+
 def create_nutrient():  ##
 	all_list = read_word()
 	file_object = open('Nutrients.txt','w')
@@ -243,7 +243,7 @@ def create_nutrient():  ##
 def imple_table():
 	table = set({'机','器','备','犁','耙'})
 	return table
-	
+
 def create_implements():  ##只检查了200个
 	all_list = read_word()
 	file_object = open('Agricultural_implements.txt','w')
@@ -253,15 +253,15 @@ def create_implements():  ##只检查了200个
 		if word[len(word)-1] in imple :
 			file_object.write(word+" 14\n")
 	file_object.close()
-	
+
 #create_implements()
-	
+
 # 标注农业技术
 def is_tech(s):
 	if '栽培' in s or '防疫' in s or '嫁接' in s :
 		return True
 	return False
-	
+
 def create_technology():  ##
 	all_list = read_word()
 	file_object = open('Technology.txt','w')
@@ -270,5 +270,36 @@ def create_technology():  ##
 		if is_tech(word) :
 			file_object.write(word+" 15\n")
 	file_object.close()
-	
-create_technology()
+
+# 标注事件
+def is_event(s):
+	# if '事件' in s or '争议' in s or '案件' in s or '案\n' in s :
+	if '事件' in s or '争议' in s or '案件' in s or '\n' in s :
+		return True
+	return False
+
+def create_event():  ##
+	all_list = read_word()
+	file_object = open('Event.txt','w')
+	for word in all_list:
+		word = word.strip()
+		if is_event(word) :
+			file_object.write(word+" 15\n")
+	file_object.close()
+
+read_word()
+# create_invalid()
+# create_person()  ##最后还是只检查了100个，因为姓名很容易看错
+# create_location()  ##只检查了200个
+# create_organization()  ##
+# create_econo()  ##
+# create_animal()  ##只检查了200个
+# create_plant()  ##只检查了200个
+# create_chemicals()  ##只检查了200个
+# create_climate()  ##
+# create_foodItem()  ##
+# create_disease()  ##只检查了200个
+# create_nutrient()  ##
+# create_implements()  ##只检查了200个
+# create_technology()  ##
+create_event()  ##

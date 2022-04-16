@@ -15,10 +15,11 @@ def showtagging_data(request):
 		# 连接数据库
 		db = neo_con
 		title = request.GET['title']
-		answer = db.matchcsNodebyTitle(title)[0]['n']
-		if answer == None:
-			ctx['title'] = '<h1> 该url不存在，别乱搞！ </h1>'
+		answer = db.matchcsNodebyTitle(title)
+		if answer == []:
+			ctx['title'] = '<h1> 该实体不存在，请换一个 </h1>'
 			return render(request, "tagging_data.html", ctx)
+		answer = answer[0]['n']
 		ctx['detail'] = answer['detail']
 		ctx['title'] = answer['title']
 		image = answer['image']
@@ -34,10 +35,10 @@ def showtagging_data(request):
 				ctx['baseInfoValueList'].append(p.split('=')[1])
 
 		text = ""
-		List = answer['openTypeList'].split('##')
+		List = answer['categories'].split('##')
 		for p in List:
 			text += '<span class="badge badge-success">' + str(p) + '</span> '
-		ctx['openTypeList'] = text
+		ctx['categories'] = text
 
 		text = ""
 		keyList = ctx['baseInfoKeyList']
@@ -68,23 +69,18 @@ def showtagging_data(request):
 
 		text = ""
 		tag_name_list = []
-		tag_name_list.append('Invalid（不合法，不是具体的实体，或一些脏数据，或与农业毫无关系）')
+		tag_name_list.append('Invalid（不合法，不是具体的实体，或一些脏数据，或与计算机毫无关系）')
 		tag_name_list.append('Person（人物，职位）')
 		tag_name_list.append('Location（地点，区域）')
 		tag_name_list.append('Organization（机构，会议）')
 		tag_name_list.append('Political economy（政治经济名词）')
-		tag_name_list.append('Animal（动物学名词，包括畜牧类，爬行类，鸟类，鱼类，等）')
-		tag_name_list.append('Plant（植物学名词，包括了植物及相关名词，水果，蔬菜，谷物，草药，菌类，植物器官，其他植物）')
-		tag_name_list.append('化学名词，包括肥料，农药，杀菌剂，其它化学品，术语等')
-		tag_name_list.append('Climate（气候，季节）')
-		tag_name_list.append('Food items（动植物产品）')
-		tag_name_list.append('Diseases（动植物疾病）')
-		tag_name_list.append('Natural Disaster（自然灾害）')
-		tag_name_list.append('Nutrients（营养素，包括脂肪，矿物质，维生素，碳水化合物等）')
-		tag_name_list.append('Biochemistry（生物学名词，包括基因相关，人体部位，组织器官，细胞，细菌，术语）')
-		tag_name_list.append('Agricultural implements（农机具，一般指机械或物理设施）')
-		tag_name_list.append('Technology(农业相关术语，技术和措施)')
-		tag_name_list.append('other（除上面类别之外的其它名词实体，可以与农业无关但必须是实体）')
+		tag_name_list.append('Theory (计算机理论基础术语，算法和数据结构，抽象)')
+		tag_name_list.append('Technology (计算机工程相关术语，技术发明和应用措施，抽象)')
+		tag_name_list.append('Software (计算机工程软件以及相关实体，具象)')
+		tag_name_list.append('Hardware (计算机科学相关硬件，现实中存在物体)')
+		tag_name_list.append('Event (计算机相关行为现象或相关事件)')
+		tag_name_list.append('Game (计算机游戏)')
+		tag_name_list.append('other（除上面类别之外的其它名词实体，可以与计算机无关但必须是实体）')
 
 		count = 0
 		for i in range(len(tag_name_list)):

@@ -9,9 +9,12 @@ from Model.neo_models import Neo4j
 from Model.mongo_model import Mongo
 from toolkit.vec_API import word_vector_model
 from toolkit.tree_API import TREE
+from pyfasttext import FastText
 
 pre_load_thu = thulac.thulac()  #默认模式
 print('thulac open!')
+
+fastText = FastText('./toolkit/wiki.zh.bin')
 
 neo_con = Neo4j()   #预加载neo4j
 neo_con.connectDB()
@@ -22,8 +25,12 @@ filePath = os.getcwd()
 with open(filePath+'/toolkit/predict_labels.txt','r',encoding="utf-8") as csvfile:
 	reader = csv.reader(csvfile, delimiter=' ')
 	for row in reader:
-		row_title = str(row[0]).replace('_', ' ')
-		predict_labels[row_title] = int(row[1])
+		row_title = ' '.join(row[:len(row) - 1])
+		predict_labels[row_title] = int(row[len(row) - 1])
+	# for row in reader:
+	# 	row_title = str(row[0]).replace('_', ' ')
+	# 	predict_labels[row_title] = int(row[1])
+	# print(predict_labels)
 print('predicted labels load over!')
 
 # 读取word vector
@@ -33,7 +40,7 @@ wv_model = word_vector_model()
 
 wv_model.read_vec(filePath+'/toolkit/vector_15.txt') # 降到15维了
 
-# 读取农业层次树
+# 读取计算机科学层次树
 tree = TREE()
 tree.read_edge(filePath+'/toolkit/wikipedia_tree.txt')
 tree.read_leaf(filePath+'/toolkit/leaf_list.txt')

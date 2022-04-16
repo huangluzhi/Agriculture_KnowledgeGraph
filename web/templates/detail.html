@@ -20,15 +20,8 @@
                             </div>
                             <hr class="my-4" />
                             <div class="row">
-                                {% if image != empty %}
-                                <div class="col-md-3">
-                                    <a href="#" class="thumbnail">
-                                        {{ image }}
-                                    </a>
-                                </div>
-                                {% endif %}
                                 <div class="col">
-                                    <p class="card-text">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ detail }}</p>
+                                    <p class="card-text">{{ image }}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ detail }}</p>
                                 </div>
                             </div>
                             <br /> {{ baseInfoTable }}

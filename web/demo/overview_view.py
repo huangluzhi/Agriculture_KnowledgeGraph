@@ -69,7 +69,7 @@ def show_overview(request):
 		for p in fatherList:
 			father += '<li role="presentation"> <a href="overview?node='
 			father += p + '">'
-			father += '<i class="fa fa-hand-o-right" aria-hidden="true"></i>&nbsp;&nbsp;' + p + '</a></li>'
+			father += '<i class="fa fa-external-link" aria-hidden="true"></i>&nbsp;&nbsp;' + p + '</a></li>'
 		father += '</ul>'
 		if len(fatherList) == 0:
 			father = '<p>已是最高级分类</p>'
@@ -80,7 +80,7 @@ def show_overview(request):
 		for p in branchList:
 			branch += '<li role="presentation"> <a href="overview?node='
 			branch += p + '">'
-			branch += '<i class="fa fa-hand-o-right" aria-hidden="true"></i>&nbsp;&nbsp;' + p + '</a></li>'
+			branch += '<i class="fa fa-external-link" aria-hidden="true"></i>&nbsp;&nbsp;' + p + '</a></li>'
 		branch += '</ul>'
 		if len(branchList) == 0:
 			branch = '<p>已是最低级分类</p>'

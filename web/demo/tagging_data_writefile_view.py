@@ -4,6 +4,7 @@ from django.views.decorators import csrf
 import sys
 import json
 import random
+from toolkit.pre_load import neo_con
 
 sys.path.append("..")
 from toolkit.pre_load import pre_load_thu
@@ -18,14 +19,14 @@ def tagging_push(request):
 		pair = f.split()
 		s.add(pair[0].strip())
 	file_object.close()
-	
+
 	file_object = open('label_data/word_list.txt','r')
 	all_list = []
 	for f in file_object:
 		all_list.append(f.strip())
 	ln = len(all_list)
 	next_title = all_list[random.randint(0,ln)]
-	
+
 	if 'label' in request.GET and 'title' in request.GET:
 		title = request.GET['title'].strip()
 		label = request.GET['label'].strip()
@@ -39,12 +40,15 @@ def tagging_push(request):
 			file_object.close()
 		else:
 			print('用户未选择label')
-		
-	while next_title in s:  # 如果冲突就再选
+
+	answer = neo_con.matchcsNodebyTitle(next_title)
+	while next_title in s or answer == []:  # 如果冲突就再选
+	# while next_title in s:  # 如果冲突就再选
 		next_title = all_list[random.randint(0,ln)]
-		
+		answer = neo_con.matchcsNodebyTitle(next_title)
+
 	ctx['next'] = "<input id='next' value='" + next_title + "' style='display:none;'></input>"
-		
-			
+
+
 	return render(request, "tagging_cache.html", ctx)
 

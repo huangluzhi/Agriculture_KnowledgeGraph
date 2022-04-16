@@ -46,7 +46,8 @@ def showdetail(request):
 		image = answer['image']
 
 		if image != "":
-			ctx['image'] = '<img src="' + str(image) + '" alt="该条目无图片" height="100%" width="100%" >'
+			# ctx['image'] = '<img src="' + str(image) + '?width=200" alt="该条目无图片" height="100%" width="100%" >'
+			ctx['image'] = '<div style="float: right; clear: both; width: 30%; min-width: 120px" align="center"><img src="' + image + '?width=200" alt="' + re.findall('/([^/.]+?).[^/.]*$',image)[0] + '" hspace="8"><br>' + '' + '</div>'
 
 		ctx['baseInfoValueList'] = []
 		ctx['baseInfoKeyList'] = []

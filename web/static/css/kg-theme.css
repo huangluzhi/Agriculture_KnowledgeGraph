@@ -133,7 +133,7 @@ button.disabled:hover {
 }
 
 .modal {
-    color: var(--main-wrapper-bg)
+    color: var(--text-color)
 }
 
 .modal-backdrop {
@@ -167,4 +167,15 @@ button.disabled:hover {
 .dropdown-item:hover {
     color: var(--text-color);
     background-color: var(--mask-bg);
+}
+
+.popover-header,
+.popover-body,
+.popover {
+    color: var(--text-color);
+    background-color: var(--main-wrapper-bg);
+}
+
+.popover-header {
+    border-bottom-color: var(--main-border-color);
 }

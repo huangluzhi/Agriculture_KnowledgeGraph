@@ -4,7 +4,7 @@ from django.views.decorators import csrf
 
 import sys
 sys.path.append("..")
-from toolkit.pre_load import pre_load_thu,neo_con,predict_labels
+from toolkit.pre_load import pre_load_thu,neo_con,predict_labels,fastText
 from toolkit.NER import get_NE,temporaryok,get_explain,get_detail_explain
 
 # 读取实体解析的文本
@@ -22,14 +22,24 @@ def ER_post(request):
 		NE_List = get_NE(key)  #获取实体列表
 
 		for pair in NE_List:   #根据实体列表，显示各个实体
+			if type(pair[1]) == list:
+				text += "<span class='d-inline-block' data-original-title='可能相关实体：' data-content='" + pair[1][0]+"' data-placement='top' data-trigger='hover' data-toggle='popover' data-content='Disabled popover'>"
+				text += "<a href='detail.html?title=" + pair[1][0] + "'>" + pair[0] + "</a>"
+				text += "</span>"
+				continue
 			if pair[1] == 0:
 				text += pair[0]
 				continue
 			if temporaryok(pair[1]):
-				text += "<a href='#'  data-original-title='" + get_explain(pair[1]) + "(暂无资料)'  data-placement='top' data-trigger='hover' data-content='"+get_detail_explain(pair[1])+"' class='popovers'>" + pair[0] + "</a>"
+				text += "<span class='d-inline-block' data-original-title='" + get_explain(pair[1]) +  "(暂无资料)' data-content='" + get_detail_explain(pair[1])+"' data-placement='top' data-trigger='hover' data-toggle='popover' data-content='Disabled popover'>"
+				text += "<a href='#'>" + pair[0] + "</a>"
+				text += "</span>"
 				continue
 
-			text += "<a href='detail.html?title=" + pair[0] + "'  data-original-title='" + get_explain(pair[1]) + "'  data-placement='top' data-trigger='hover' data-content='"+get_detail_explain(pair[1])+"' class='popovers'>" + pair[0] + "</a>"
+			# text += '<span class="d-inline-block" data-trigger="hover" data-toggle="popover" data-content="Disabled popover">'
+			text += "<span class='d-inline-block' data-original-title='" + get_explain(pair[1]) +  "' data-content='" + get_detail_explain(pair[1])+"' data-placement='top' data-trigger='hover' data-toggle='popover' data-content='Disabled popover'>"
+			text += "<a href='detail.html?title=" + pair[0] + "'>" + pair[0] + "</a>"
+			text += "</span>"
 
 		ctx['rlt'] = text
 

@@ -1,5 +1,6 @@
 from py2neo import Graph, Node, Relationship, cypher, Path
 import neo4j
+import re
 class Neo4j():
 	graph = None
 	def __init__(self):
@@ -11,7 +12,7 @@ class Neo4j():
 
 	def matchItembyTitle(self,value):
 
-		sql = "MATCH (n:Item { title: '" + str(value) + "' }) return n;"
+		sql = "MATCH (n:Item { title: '" + re.sub('[\']','\\\\1',str(value)) + "' }) return n;"
 		answer = self.graph.run(sql).data()
 		return answer
 

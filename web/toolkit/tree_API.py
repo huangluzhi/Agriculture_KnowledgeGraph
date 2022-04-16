@@ -82,6 +82,8 @@ class TREE :
         return self.anspath
 
     def get_father(self, word):   # 获得word结点的所有父节点
+        if word == self.root:
+            return []
         ansList = []
         for k,v in self.edge.items():
             if word in v:
@@ -187,7 +189,7 @@ class TREE :
         return self.UI_str
 
 
-# 读取农业层次树
+# 读取计算机科学层次树
 #tree = TREE()
 #tree.read_edge('wikipedia_tree.txt')
 #tree.read_leaf('leaf_list.txt')
